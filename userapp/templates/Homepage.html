@@ -139,32 +139,53 @@
         }
         
         body {
-            background-color: #fff8af;
+            background-color: #FFFFFF;
             /* You can adjust other styles here */
+        }
+
+        .round-badge {
+            display: inline-block;
+            border-radius: 50%;
+            background-color: #007bff; /* Change this to your desired background color */
+            color: #fff; /* Change this to your desired text color */
+            width: 30px; /* Adjust the width and height as needed */
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            font-size: 16px; /* Adjust the font size for the big letter */
         }
     </style>
 </head>
 
 <body>
-    <div class="jumbotron">
-        <div class="container text-center">
-            <h1>Recipe Hub</h1>
-            <p>Explore Delicious Recipes</p>
+    <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <!-- Add carousel items/slides here -->
+            <div class="carousel-item active">
+                <img class="img-fluid" alt="Responsive image" src="/static/extra/01.jpg" class="d-block w-100" alt="Slide 1">
+            </div>
+            <div class="carousel-item">
+                <img  class="img-fluid" alt="Responsive image" src="/static/extra/02.jpg" class="d-block w-100" alt="Slide 2">
+            </div>
+            <div class="carousel-item">
+                <img  class="img-fluid" alt="Responsive image" src="/static/extra/03.jpg" class="d-block w-100" alt="Slide 2">
+            </div>
+            <!-- Add more slides as needed -->
         </div>
     </div>
 
     <nav class="navbar navbar-expand-lg " style="background-color: #92be58;">
         <div class="container">
-            <a class="navbar-brand" alt="404" ><img src="/static/extra/_c2c73f67-6f43-4645-9ce2-ed34deed6b32.jpg" alt="404" height="40px"></a>
+            <a class="navbar-brand" alt="404" ><img src="/static/extra/logo.png" alt="404" height="60px" width="120px"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
                 aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
-            </button>
+            </button>   
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     {%if "uname" in request.session%}
                     <li class="nav-item">
-                        <a class="nav-link " aria-current="page" href="#">Welcome {{request.session.uname}}</a>
+                        <a class="nav-link " aria-current="page" href="#"></a>
                     </li>
                     {%else%}
                     <li class="nav-item">
@@ -213,8 +234,8 @@
                         </li>
                     </div>
                     <div class="b2">
-                        <li class="nav-item">
-                            <a href="/showcart" class="btn btn-warning btn-sm" role="button">Cart</a>
+                        <li class="nav-item" >
+                            <a class="nav-link " aria-current="page" href="#">Welcome {{request.session.uname}} </a>
                         </li>
                     </div>
                     {%else%}
