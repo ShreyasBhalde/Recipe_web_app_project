@@ -1,0 +1,95 @@
+{% extends "Homepage.html" %}
+
+{% block content %}
+
+<style>
+    .h2 {
+        text-align: center;
+    }
+
+
+    .fo {
+        color: #777;
+        border: 0px solid #afafaf;
+        width: 50%;
+        margin-left: 25%;
+        margin-top: 50px;
+        text-align: center;
+        padding: 5px;
+        padding-top: 20px;
+        border-radius: 3px;
+        box-shadow: 0px 0px 8px #777;
+        background: rgba(255, 255, 255, 0.6)
+    }
+   
+</style>
+
+<div class="fo">
+    <h2>Edit Recipe</h2>
+    <form method="post" enctype="multipart/form-data" action="/editrecipe/{{recipe.id}}">
+        {% csrf_token %}
+        <div class="container">
+            <table class="table">
+                <tr>
+                    <td>Recipe Name</td>
+                    <td>
+                        <input type="text" name="recipe_name" class="form-control" value="{{ recipe.recipe_name }}" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Short Info</td>
+                    <td>
+                        <input type="text" name="shortinfo" class="form-control" value="{{ recipe.shortinfo }}" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Ingredients</td>
+                    <td>
+                        <input type="text" name="ingredients" class="form-control" value="{{ recipe.ingredients }}" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Description</td>
+                    <td>
+                        <input type="text" name="description" class="form-control" value="{{ recipe.description }}" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Steps</td>
+                    <td>
+                        <input type="text" name="steps" class="form-control" value="{{ recipe.steps }}" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Image</td>
+                    <td>
+                        <input type="file" name="image" accept="image/" class="form-control" value="{{ recipe.image.url }}" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Added By</td>
+                    <td>
+                        <input type="text" name="addedby" class="form-control" value="{{ recipe.addedby }}" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Category</td>
+                    <td>
+                        <select name="cat_fk" class="form-control">
+                            {% for category in categories %}
+                                <option value="{{ category.id }}" {% if category.id == recipe.cat_fk.id %}selected{% endif %}>
+                                    {{ category.cat_name }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><button type="submit" class="button btn-success">Save Changes</button></td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,273 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Recipe Website</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        /* Remove the navbar's default rounded borders and increase the bottom margin */
+        .navbar {
+            margin-bottom: 30px;
+            border-radius: 0;
+        }
+
+        /* Remove the jumbotron's default bottom margin */
+        .jumbotron {
+            margin-bottom: 0;
+            background-color: #cae17c;
+            color: #fff;
+            padding: 60px 0;
+        }
+
+        /* Modernizing the navigation bar */
+        .navbar-dark .navbar-toggler-icon {
+            background-color: #fff;
+        }
+
+        /* Modernizing the navigation links */
+        .navbar-nav .nav-link {
+            color: #fff;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #f8f9fa;
+        }
+
+        /* Modernizing the card design */
+        .card {
+            border: none;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card-header {
+            background-color: #9dcc25;
+            color: #fff;
+            border-bottom: none;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .card-img-top {
+            border-radius: 8px 8px 0 0;
+        }
+
+        /* Modernizing the footer */
+        footer {
+            background-color: #343a40;
+            color: #fff;
+            padding: 25px 0;
+        }
+
+        /* Modernizing the form */
+        form {
+            display: flex;
+        }
+
+        /* Modernizing the form input and button */
+        .form-control {
+            border-radius: 0;
+            margin-right: 10px;
+        }
+
+        .btn-danger {
+            border-radius: 0;
+        }
+
+        .search {
+            padding-right: 250px;
+            align-items: center;
+            padding-top: 5px;
+        }
+
+        .b1 {
+            padding-right: 20px;
+            align-items: center;
+            padding-top: 5px;
+            text-align: center;
+            size: 12px;
+
+        }
+
+        .b2 {
+            padding-right: 20px;
+            align-items: center;
+            padding-top: 5px;
+            text-align: center;
+        }
+
+        .main {
+            padding-top: 10px;
+            padding-left: 80px;
+        }
+
+        hr.solid {
+            border-top: 3px solid #bbb;
+        }
+
+        .recipe-details-button {
+            display: inline-block;
+            padding: 10px 20px;
+            text-decoration: none;
+            text-align: center;
+            background-color: #4caf50;
+            /* Green background color */
+            color: white;
+            /* White text color */
+            border: 2px solid #4caf50;
+            /* Green border */
+            border-radius: 5px;
+            /* Rounded corners */
+            transition: background-color 0.3s ease;
+        }
+
+        .recipe-details-button:hover {
+            background-color: #363e37;
+            /* Darker green on hover */
+            border-color: #010501;
+            /* Darker green border on hover */
+        }
+        h3{
+            text-align: center;
+        }
+        
+        body {
+            background-color: #fff8af;
+            /* You can adjust other styles here */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="jumbotron">
+        <div class="container text-center">
+            <h1>Recipe Hub</h1>
+            <p>Explore Delicious Recipes</p>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg " style="background-color: #92be58;">
+        <div class="container">
+            <a class="navbar-brand" alt="404" ><img src="/static/extra/_c2c73f67-6f43-4645-9ce2-ed34deed6b32.jpg" alt="404" height="40px"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
+                aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    {%if "uname" in request.session%}
+                    <li class="nav-item">
+                        <a class="nav-link " aria-current="page" href="#">Welcome {{request.session.uname}}</a>
+                    </li>
+                    {%else%}
+                    <li class="nav-item">
+                        <a class="nav-link " aria-current="page" href="/"></a>
+                    </li>
+                    {%endif%}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Category
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            {%for cat in cats%}
+                            <a class="dropdown-item" href="/showrecipes/{{cat.id}}">{{ cat.cat_name }}</a>
+                            {%endfor%}
+                        </div>
+                    </li>
+                    {%if "uname" in request.session%}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/account"> My Account</a>
+                    </li>
+                    {%else%}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contact"> Contact us</a>
+                    </li>
+                    {%endif%}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/aboutus">About us</a>
+                    </li>
+                </ul>
+                <div class="search">
+                    <form class="d-flex" role="search" action="/searchrecipes/" method="GET">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="query">
+                        <button class="btn btn-warning btn-sm" type="submit">Search</button>
+                    </form>
+                </div>
+
+                <ul class="nav navbar-nav navbar-right">
+                    {%if "uname" in request.session%}
+                    <div class="b1">
+                        <li class="nav-item">
+                            <a href="/logout" class="btn btn-warning btn-sm" role="button">Log Out</a>
+                        </li>
+                    </div>
+                    <div class="b2">
+                        <li class="nav-item">
+                            <a href="/showcart" class="btn btn-warning btn-sm" role="button">Cart</a>
+                        </li>
+                    </div>
+                    {%else%}
+                    <div class="b1">
+                        <li class="nav-item">
+                            <a href="/login" class="btn btn-warning btn-sm" role="button">Login</a>
+                        </li>
+                    </div>
+                    <div class="b2">
+                        <li class="nav-item">
+                            <a href="/signup" class="btn btn-warning btn-sm" role="button">Sign Up</a>
+                        </li>
+                        {%endif%}
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    </div>
+
+    {% block content %}
+    <div class="container">
+        <div class="row">
+            {% if cat %}
+                <h3 class="heading">{{ cat.cat_name }}</h3><br><br><br>
+            {% else %}
+                <h3 class="heading"></h3>
+            {% endif %}
+
+            {% for recipe in recs %}
+                <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-header">{{ recipe.recipe_name }}</div>
+                        <img style="height: 100%; width: 100%;" src="{{ recipe.image.url }}" class="card-img-top" alt="Image">
+                        <div class="card-body">
+                            <p class="card-text">{{ recipe.shortinfo }}</p>
+                        </div>
+                        {%if "uname" in request.session%}
+                        <a href="/viewdetails/{{ recipe.id }}" class="recipe-details-button">View Details</a>
+                        {%else%}
+                        <a href="/login" class="recipe-details-button">View Details</a>
+                        {%endif%}
+                    </div>
+                    <br>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+
+
+    
+</body>
+
+</html>

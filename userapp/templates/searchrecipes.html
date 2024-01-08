@@ -1,0 +1,26 @@
+{% extends 'Homepage.html' %}
+
+{% block content %}
+<div class="container">
+    {% if query %}
+    <h3 class="heading">Search Results for "{{ query }}"</h3>
+    {% else %}
+    <h3 class="heading"> {{cat.cat_name}}</h3>
+    {% endif %}
+    <div class="row">
+        {% for recipe in recipes %}
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-header">{{ recipe.recipe_name }}</div>
+                <img style="height: 294px; width: 413px;" src="{{ recipe.image.url }}" class="card-img-top" alt="Image">
+                <div class="card-body">
+                    <p class="card-text">{{ recipe.shortinfo }}</p>
+                </div>
+                <a href="/viewdetails/{{ recipe.id }}" class="recipe-details-button">View Details</a>
+            </div>
+            <br>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

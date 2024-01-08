@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+<style>
+.recipe-details-button {
+  display: inline-block;
+  padding: 10px 20px;
+  text-decoration: none;
+  background-color: #4caf50; /* Green background color */
+  color: white; /* White text color */
+  border: 2px solid #4caf50; /* Green border */
+  border-radius: 5px; /* Rounded corners */
+  transition: background-color 0.3s ease;
+}
+
+.recipe-details-button:hover {
+  background-color: #363e37; /* Darker green on hover */
+  border-color: #010501; /* Darker green border on hover */
+}
+
+</style>
+</head>
+<body>
+ <a href="/viewdetails/{{recipe.id}}" class="recipe-details-button">View Details</a>
+
+ <footer class="container-fluid text-center">
+    <p>Recipe Hub Copyright</p>
+    <form class="form-inline">
+        <input type="email" class="form-control" size="50" placeholder="Email Address">
+        <button type="button" class="btn btn-danger">Subscribe</button>
+    </form>
+</footer>
+    
+</body>
+</html>
